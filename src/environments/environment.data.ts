@@ -1,9 +1,9 @@
 interface Environment {
-  apiUrls: string;
+	apiUrls: string
 }
 
 export const environmentData: Record<string, Environment> = {
-  local: {
-    apiUrls: 'https://pokeapi.co',
-  },
-};
+	local: {
+		apiUrls: 'https://pokeapi.co',
+	},
+}

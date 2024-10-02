@@ -1,9 +1,24 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideHttpClient, withFetch, withJsonpSupport } from '@angular/common/http'
+import { ApplicationConfig, LOCALE_ID, provideZoneChangeDetection } from '@angular/core'
+import { provideClientHydration } from '@angular/platform-browser'
+import { provideRouter, withPreloading } from '@angular/router'
+import { QuicklinkStrategy } from 'ngx-quicklink'
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async'
 
-import { routes } from './app.routes';
-import { provideClientHydration } from '@angular/platform-browser';
+import { routes } from './app.routes'
+import { provideAuth } from './core/auth/auth.provider'
+import { registerLocaleData } from '@angular/common'
+import localeVi from '@angular/common/locales/vi'
+registerLocaleData(localeVi)
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration()]
-};
+	providers: [
+		provideZoneChangeDetection({ eventCoalescing: true }),
+		provideRouter(routes, withPreloading(QuicklinkStrategy)),
+		provideClientHydration(),
+		provideHttpClient(withJsonpSupport(), withFetch()),
+		provideAnimationsAsync(),
+		provideAuth(),
+		{ provide: LOCALE_ID, useValue: 'vi' },
+	],
+}

@@ -2573,6 +2573,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ngrx/operators@npm:^18.0.2":
+  version: 18.0.2
+  resolution: "@ngrx/operators@npm:18.0.2"
+  dependencies:
+    tslib: "npm:^2.3.0"
+  peerDependencies:
+    rxjs: ^6.5.3 || ^7.4.0
+  checksum: 10c0/9c7150fe8cd26fce199deb1ae22409a5aeac1a30fb3617897a21184853e70d21c855f302f158ca1866418bfd970b6ebc62f6a9d98fbb615704fb87ed6518a2c0
+  languageName: node
+  linkType: hard
+
+"@ngrx/signals@npm:^18.0.2":
+  version: 18.0.2
+  resolution: "@ngrx/signals@npm:18.0.2"
+  dependencies:
+    tslib: "npm:^2.3.0"
+  peerDependencies:
+    "@angular/core": ^18.0.0
+    rxjs: ^6.5.3 || ^7.4.0
+  peerDependenciesMeta:
+    rxjs:
+      optional: true
+  checksum: 10c0/c50a053f9365762146bfcf2a0383789bd0e7b1e765f0c4ab61c6e28c1535dfcaa10ab118134803b5a9996d6e07021c69733a0ae53fae7875bc06c13340365a73
+  languageName: node
+  linkType: hard
+
 "@ngtools/webpack@npm:18.2.6":
   version: 18.2.6
   resolution: "@ngtools/webpack@npm:18.2.6"
@@ -7150,6 +7176,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ngx-quicklink@npm:^0.4.6":
+  version: 0.4.6
+  resolution: "ngx-quicklink@npm:0.4.6"
+  dependencies:
+    tslib: "npm:^2.6.0"
+  peerDependencies:
+    "@angular/common": ^18.0.0
+    "@angular/core": ^18.0.0
+  checksum: 10c0/9120adb39ed47bacadd60ec4c9634ab9c259c27d1b9a491d6babcbadca92b5197abe3f9d3181cd2e4f8fb279eca99a7b9399edacf3eec81f01c49f7bd8712357
+  languageName: node
+  linkType: hard
+
 "nice-napi@npm:^1.0.2":
   version: 1.0.2
   resolution: "nice-napi@npm:1.0.2"
@@ -7756,6 +7794,8 @@ __metadata:
     "@angular/platform-server": "npm:^18.2.0"
     "@angular/router": "npm:^18.2.0"
     "@angular/ssr": "npm:^18.2.6"
+    "@ngrx/operators": "npm:^18.0.2"
+    "@ngrx/signals": "npm:^18.0.2"
     "@types/express": "npm:^4.17.17"
     "@types/jasmine": "npm:~5.1.0"
     "@types/node": "npm:^18.18.0"
@@ -7767,7 +7807,10 @@ __metadata:
     karma-coverage: "npm:~2.2.0"
     karma-jasmine: "npm:~5.1.0"
     karma-jasmine-html-reporter: "npm:~2.1.0"
+    ngx-quicklink: "npm:^0.4.6"
     postcss: "npm:^8.4.47"
+    prettier: "npm:^3.3.3"
+    prettier-plugin-tailwindcss: "npm:^0.6.8"
     rxjs: "npm:~7.8.0"
     tailwindcss: "npm:^3.4.13"
     tslib: "npm:^2.3.0"
@@ -7936,6 +7979,73 @@ __metadata:
     picocolors: "npm:^1.1.0"
     source-map-js: "npm:^1.2.1"
   checksum: 10c0/929f68b5081b7202709456532cee2a145c1843d391508c5a09de2517e8c4791638f71dd63b1898dba6712f8839d7a6da046c72a5e44c162e908f5911f57b5f44
+  languageName: node
+  linkType: hard
+
+"prettier-plugin-tailwindcss@npm:^0.6.8":
+  version: 0.6.8
+  resolution: "prettier-plugin-tailwindcss@npm:0.6.8"
+  peerDependencies:
+    "@ianvs/prettier-plugin-sort-imports": "*"
+    "@prettier/plugin-pug": "*"
+    "@shopify/prettier-plugin-liquid": "*"
+    "@trivago/prettier-plugin-sort-imports": "*"
+    "@zackad/prettier-plugin-twig-melody": "*"
+    prettier: ^3.0
+    prettier-plugin-astro: "*"
+    prettier-plugin-css-order: "*"
+    prettier-plugin-import-sort: "*"
+    prettier-plugin-jsdoc: "*"
+    prettier-plugin-marko: "*"
+    prettier-plugin-multiline-arrays: "*"
+    prettier-plugin-organize-attributes: "*"
+    prettier-plugin-organize-imports: "*"
+    prettier-plugin-sort-imports: "*"
+    prettier-plugin-style-order: "*"
+    prettier-plugin-svelte: "*"
+  peerDependenciesMeta:
+    "@ianvs/prettier-plugin-sort-imports":
+      optional: true
+    "@prettier/plugin-pug":
+      optional: true
+    "@shopify/prettier-plugin-liquid":
+      optional: true
+    "@trivago/prettier-plugin-sort-imports":
+      optional: true
+    "@zackad/prettier-plugin-twig-melody":
+      optional: true
+    prettier-plugin-astro:
+      optional: true
+    prettier-plugin-css-order:
+      optional: true
+    prettier-plugin-import-sort:
+      optional: true
+    prettier-plugin-jsdoc:
+      optional: true
+    prettier-plugin-marko:
+      optional: true
+    prettier-plugin-multiline-arrays:
+      optional: true
+    prettier-plugin-organize-attributes:
+      optional: true
+    prettier-plugin-organize-imports:
+      optional: true
+    prettier-plugin-sort-imports:
+      optional: true
+    prettier-plugin-style-order:
+      optional: true
+    prettier-plugin-svelte:
+      optional: true
+  checksum: 10c0/b74b9594928cce715a272e6837b30ff7090f5e24cc556c579b84e4d1740787aa15d48179e6f99ef11c6c879941dec66413a1f9c3e5e980a94520dc50ed21bc8f
+  languageName: node
+  linkType: hard
+
+"prettier@npm:^3.3.3":
+  version: 3.3.3
+  resolution: "prettier@npm:3.3.3"
+  bin:
+    prettier: bin/prettier.cjs
+  checksum: 10c0/b85828b08e7505716324e4245549b9205c0cacb25342a030ba8885aba2039a115dbcf75a0b7ca3b37bc9d101ee61fab8113fc69ca3359f2a226f1ecc07ad2e26
   languageName: node
   linkType: hard
 
@@ -9336,7 +9446,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.0, tslib@npm:^2.1.0, tslib@npm:^2.3.0":
+"tslib@npm:^2.0.0, tslib@npm:^2.1.0, tslib@npm:^2.3.0, tslib@npm:^2.6.0":
   version: 2.7.0
   resolution: "tslib@npm:2.7.0"
   checksum: 10c0/469e1d5bf1af585742128827000711efa61010b699cb040ab1800bcd3ccdd37f63ec30642c9e07c4439c1db6e46345582614275daca3e0f4abae29b0083f04a6
