@@ -13,6 +13,6 @@ export class ListPokemonComponent {
 	protected readonly store = inject(ListPokemonStore)
 
 	ngOnInit() {
-		this.store.getListBrands()
+		this.store.getListPokemon()
 	}
 }

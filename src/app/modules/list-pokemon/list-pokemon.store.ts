@@ -27,11 +27,35 @@ export const ListPokemonStore = signalStore(
 	})),
 	withMethods((store, service = injectListPokemonService()) => {
 		return {
-			getListBrands: rxMethod<void>(
+			getListPokemon: rxMethod<void>(
 				pipe(
 					tap(() => patchState(store, { isLoading: true })),
 					switchMap(() =>
 						service.getListPokemon().pipe(
+							tapResponse({
+								next: (res) => {
+									console.log(res.results)
+									patchState(store, {
+										data: res.results,
+									})
+								},
+								error: () => {
+									patchState(store, {
+										data: [],
+									})
+								},
+								finalize: () => patchState(store, { isLoading: false }),
+							})
+						)
+					)
+				)
+			),
+
+			getListPokemonDetail: rxMethod<string>(
+				pipe(
+					tap(() => patchState(store, { isLoading: true })),
+					switchMap((url) =>
+						service.getListPokemonDetail(url).pipe(
 							tapResponse({
 								next: (res) => {
 									console.log(res.results)
