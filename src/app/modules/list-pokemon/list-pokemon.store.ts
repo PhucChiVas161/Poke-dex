@@ -44,6 +44,11 @@ export const ListPokemonStore = signalStore(
 				const pokemon = store.dataDetail().find((p) => p.id === id)
 				return pokemon ? pokemon.types[0].type.name : ''
 			},
+
+			getImagePokemon: (id: number): string => {
+				const pokemon = store.dataDetail().find((p) => p.id === id)
+				return pokemon ? pokemon.sprites.other.dream_world.front_default : ''
+			},
 		}
 	})
 )
