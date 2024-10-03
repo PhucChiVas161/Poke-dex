@@ -2,7 +2,7 @@ import { patchState, signalStore, withComputed, withMethods, withState } from '@
 import { rxMethod } from '@ngrx/signals/rxjs-interop'
 import { computed } from '@angular/core'
 
-import { ListPokemonDetail, Result } from './list-pokemon.type'
+import { ListPokemonDetail, PokemonTypes } from './list-pokemon.type'
 import { injectListPokemonService } from './list-pokemon.service'
 import { pipe, tap, switchMap, finalize } from 'rxjs'
 
@@ -45,9 +45,13 @@ export const ListPokemonStore = signalStore(
 				return pokemon ? pokemon.types[0].type.name : ''
 			},
 
-			getImagePokemon: (id: number): string => {
-				const pokemon = store.dataDetail().find((p) => p.id === id)
-				return pokemon ? pokemon.sprites.other.dream_world.front_default : ''
+			getTypePokemonImageUrl: (type: string): string => {
+				const typeId = PokemonTypes[type as keyof typeof PokemonTypes]
+				return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/legends-arceus/${typeId}.png`
+			},
+
+			getPokemonImageUrl: (id: number): string => {
+				return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${id}.gif`
 			},
 		}
 	})
