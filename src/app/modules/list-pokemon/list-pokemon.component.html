@@ -92,7 +92,7 @@
 		@for (item of store.dataDetail(); track $index) {
 			<div class="grid h-40 grid-cols-2 bg-{{ store.getTypePokemon(item.id) }} rounded shadow">
 				<div class="flex h-full w-full items-center justify-center">
-					<img src="{{ store.getPokemonImageUrl(item.id) }}" alt="Pokemon" class="size-3/5" />
+					<img src="{{ store.getPokemonImageUrl(item.id) }}" alt="Pokemon" class="object-cover" />
 				</div>
 				<div class="grid grid-rows-3 items-center justify-center">
 					<span class="flex justify-center text-2xl font-bold capitalize text-white">{{ item.name }}</span>
