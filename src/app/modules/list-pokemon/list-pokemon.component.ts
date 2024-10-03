@@ -6,11 +6,12 @@ import { ListPokemonStore } from './list-pokemon.store'
 	standalone: true,
 	imports: [],
 	templateUrl: './list-pokemon.component.html',
-	styles: ``,
+	styleUrl: `./list-pokemon.component.scss`,
 	providers: [ListPokemonStore],
 })
 export class ListPokemonComponent {
 	protected readonly store = inject(ListPokemonStore)
+	protected pokemonTypes: string = ''
 
 	ngOnInit() {
 		this.store.getListPokemon()

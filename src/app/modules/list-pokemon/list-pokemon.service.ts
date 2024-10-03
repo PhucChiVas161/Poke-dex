@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { inject } from '@angular/core'
-import { of } from 'rxjs'
+import { forkJoin } from 'rxjs'
+import { switchMap } from 'rxjs/operators'
 
 import { createInjectionToken } from '~/core/utils/create-injection-token'
 import { environment } from 'environments'
@@ -12,11 +13,15 @@ export const [injectListPokemonService, provideListPokemonStore] = createInjecti
 		const baseApiUrl = environment().apiUrls
 
 		return {
-			getListPokemon: () => {
-				return httpClient.get<ListPokemon>(`${baseApiUrl}/api/v2/pokemon/`)
-			},
-			getListPokemonDetail: (url: string | undefined) => {
-				return httpClient.get<ListPokemonDetail>(`${url}`)
+			getListPokemonWithDetails: () => {
+				return httpClient.get<ListPokemon>(`${baseApiUrl}/api/v2/pokemon/`).pipe(
+					switchMap((listPokemon) => {
+						const detailRequests = listPokemon.results.map((result) =>
+							httpClient.get<ListPokemonDetail>(result.url)
+						)
+						return forkJoin(detailRequests)
+					})
+				)
 			},
 		}
 	},
