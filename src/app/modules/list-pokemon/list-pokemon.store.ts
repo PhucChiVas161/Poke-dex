@@ -9,30 +9,28 @@ import { pipe, tap, switchMap, finalize } from 'rxjs'
 type ListPokemonState = {
 	dataDetail: ListPokemonDetail[]
 	isLoading: boolean
-	filter: { query: string; order: 'asc' | 'desc' }
 }
 
 const initialState: ListPokemonState = {
 	dataDetail: [],
 	isLoading: false,
-	filter: { query: '', order: 'asc' },
 }
 
 export const ListPokemonStore = signalStore(
 	withState(initialState),
-	withComputed(({ dataDetail, filter }) => ({
+	withComputed(({ dataDetail }) => ({
 		// Computed properties for the ListPokemon object
 		// query: computed(() => filter().query),
 	})),
 	withMethods((store, service = injectListPokemonService()) => {
 		return {
-			getListPokemon: rxMethod<void>(
+			getListPokemon: rxMethod<number>(
 				pipe(
 					tap(() => patchState(store, { isLoading: true })),
-					switchMap(() =>
-						service.getListPokemonWithDetails().pipe(
+					switchMap((offset: number) =>
+						service.getListPokemonWithDetails(offset).pipe(
 							tap((details) => {
-								patchState(store, { dataDetail: details })
+								patchState(store, { dataDetail: [...store.dataDetail(), ...details] })
 							}),
 							finalize(() => patchState(store, { isLoading: false }))
 						)

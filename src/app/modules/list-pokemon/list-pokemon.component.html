@@ -1,4 +1,5 @@
 <div class="h-full w-full p-2">
+	<app-spinner [loading]="store.isLoading()"></app-spinner>
 	<nav
 		class="fixed start-0 top-0 z-20 w-full border-b border-gray-200 bg-white dark:border-gray-600 dark:bg-gray-900"
 	>
@@ -87,7 +88,6 @@
 			</div>
 		</div>
 	</nav>
-
 	<div class="mt-20 grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
 		@for (item of store.dataDetail(); track $index) {
 			<div class="grid h-40 grid-cols-2 bg-{{ store.getTypePokemon(item.id) }} rounded shadow">
