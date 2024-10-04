@@ -1,5 +1,4 @@
-<div class="h-full w-full p-2">
-	<app-spinner [loading]="store.isLoading()"></app-spinner>
+<div class="h-full w-full p-2" infinite-scroll (scrolled)="onScrollDown()">
 	<nav
 		class="fixed start-0 top-0 z-20 w-full border-b border-gray-200 bg-white dark:border-gray-600 dark:bg-gray-900"
 	>
@@ -105,4 +104,5 @@
 			</div>
 		}
 	</div>
+	<app-spinner [loading]="store.isLoading()"></app-spinner>
 </div>

@@ -19,6 +19,6 @@ export const appConfig: ApplicationConfig = {
 		provideHttpClient(withJsonpSupport(), withFetch()),
 		provideAnimationsAsync(),
 		provideAuth(),
-		{ provide: LOCALE_ID, useValue: 'vi' },
+		{ provide: LOCALE_ID, useValue: 'vi' }, provideAnimationsAsync(),
 	],
 }
