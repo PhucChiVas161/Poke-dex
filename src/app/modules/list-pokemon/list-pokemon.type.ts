@@ -12,24 +12,43 @@ export interface Result {
 
 export interface ListPokemonDetail {
 	abilities: Ability[]
+
 	base_experience: number
+
 	cries: Cries
+
 	forms: Form[]
+
 	game_indices: Index[]
+
 	height: number
-	held_items: any[]
+
+	held_items: HeldItem[]
+
 	id: number
+
 	is_default: boolean
+
 	location_area_encounters: string
+
 	moves: Mfe[]
+
 	name: string
+
 	order: number
+
 	past_abilities: any[]
+
 	past_types: any[]
+
 	species: Species
+
 	sprites: Sprites
+
 	stats: Stat[]
+
 	types: Type[]
+
 	weight: number
 }
 
@@ -61,6 +80,30 @@ export interface Index {
 
 export interface Version {
 	name: string
+	url: string
+}
+
+export interface HeldItem {
+	item: Item
+
+	version_details: VersionDetail[]
+}
+
+export interface Item {
+	name: string
+
+	url: string
+}
+
+export interface VersionDetail {
+	rarity: number
+
+	version: Version2
+}
+
+export interface Version2 {
+	name: string
+
 	url: string
 }
 

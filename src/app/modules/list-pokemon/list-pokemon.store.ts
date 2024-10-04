@@ -9,11 +9,13 @@ import { pipe, tap, switchMap, finalize } from 'rxjs'
 type ListPokemonState = {
 	dataDetail: ListPokemonDetail[]
 	isLoading: boolean
+	offset: number
 }
 
 const initialState: ListPokemonState = {
 	dataDetail: [],
 	isLoading: false,
+	offset: 0,
 }
 
 export const ListPokemonStore = signalStore(
@@ -24,13 +26,16 @@ export const ListPokemonStore = signalStore(
 	})),
 	withMethods((store, service = injectListPokemonService()) => {
 		return {
-			getListPokemon: rxMethod<number>(
+			getListPokemon: rxMethod<void>(
 				pipe(
 					tap(() => patchState(store, { isLoading: true })),
-					switchMap((offset: number) =>
-						service.getListPokemonWithDetails(offset).pipe(
+					switchMap(() =>
+						service.getListPokemonWithDetails(store.offset()).pipe(
 							tap((details) => {
-								patchState(store, { dataDetail: [...store.dataDetail(), ...details] })
+								patchState(store, {
+									dataDetail: [...store.dataDetail(), ...details],
+									offset: store.offset() + 50,
+								})
 							}),
 							finalize(() => patchState(store, { isLoading: false }))
 						)
@@ -38,17 +43,17 @@ export const ListPokemonStore = signalStore(
 				)
 			),
 
-			getTypePokemon: (id: number): string => {
+			getTypePokemon: (id: number | undefined): string => {
 				const pokemon = store.dataDetail().find((p) => p.id === id)
-				return pokemon ? pokemon.types[0].type.name : ''
+				return pokemon ? pokemon.types[0].type.name : 'normal'
 			},
 
-			getTypePokemonImageUrl: (type: string): string => {
+			getTypePokemonImageUrl: (type: string | undefined): string => {
 				const typeId = PokemonTypes[type as keyof typeof PokemonTypes]
 				return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-viii/legends-arceus/${typeId}.png`
 			},
 
-			getPokemonImageUrl: (id: number): string => {
+			getPokemonImageUrl: (id: number | undefined): string => {
 				return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${id}.gif`
 			},
 		}

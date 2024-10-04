@@ -14,10 +14,10 @@ export const [injectListPokemonService, provideListPokemonStore] = createInjecti
 
 		return {
 			getListPokemonWithDetails: (offset: number) => {
-				return httpClient.get<ListPokemon>(`${baseApiUrl}/api/v2/pokemon/?offset=${offset}&limit=20`).pipe(
+				return httpClient.get<ListPokemon>(`${baseApiUrl}/api/v2/pokemon/?offset=${offset}&limit=50`).pipe(
 					switchMap((listPokemon) => {
 						const detailRequests = listPokemon.results.map((result) =>
-							httpClient.get<ListPokemonDetail>(result.url)
+							httpClient.get<ListPokemonDetail>(`${baseApiUrl}/api/v2/pokemon/${result.name}`)
 						)
 						return forkJoin(detailRequests)
 					})
