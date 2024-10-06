@@ -8,6 +8,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { routes } from './app.routes'
 import { provideAuth } from './core/auth/auth.provider'
 import { registerLocaleData } from '@angular/common'
+import { provideIcons } from './core/icons/icons.provider'
 import localeVi from '@angular/common/locales/vi'
 registerLocaleData(localeVi)
 
@@ -18,7 +19,9 @@ export const appConfig: ApplicationConfig = {
 		provideClientHydration(),
 		provideHttpClient(withJsonpSupport(), withFetch()),
 		provideAnimationsAsync(),
+		provideIcons(),
 		provideAuth(),
-		{ provide: LOCALE_ID, useValue: 'vi' }, provideAnimationsAsync(),
+		{ provide: LOCALE_ID, useValue: 'vi' },
+		provideAnimationsAsync(),
 	],
 }

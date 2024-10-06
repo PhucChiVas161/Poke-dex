@@ -8,11 +8,19 @@
 		<link rel="icon" type="image/x-icon" href="favicon.ico" />
 		<script>
 			window._ENV = 'local'
+			if (
+				localStorage.getItem('color-theme') === 'dark' ||
+				(!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+			) {
+				document.documentElement.classList.add('dark')
+			} else {
+				document.documentElement.classList.remove('dark')
+			}
 		</script>
 		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 	</head>
-	<body class="mat-typography h-full w-full bg-gray-900">
+	<body class="mat-typography h-full w-full bg-white dark:bg-gray-900">
 		<app-root></app-root>
 	</body>
 </html>
