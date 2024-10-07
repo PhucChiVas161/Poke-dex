@@ -1,46 +1,41 @@
-const { execSync } = require("child_process");
-const fs = require("fs");
-const path = require("path");
+const { execSync } = require('child_process')
+const fs = require('fs')
+const path = require('path')
 
-const name = process.argv[2];
-const folderPath = `src/app/modules/${name}`;
+const name = process.argv[2]
+const folderPath = `src/app/modules/${name}`
 
-const baseApiUrl = "${baseApiUrl}";
-const id = "${id}";
+const baseApiUrl = '${baseApiUrl}'
+const id = '${id}'
 
 function toPascalCase(str) {
-  return str
-    .split("-") // Split the string by hyphen
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter
-    .join(""); // Join the words together
+	return str
+		.split('-') // Split the string by hyphen
+		.map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter
+		.join('') // Join the words together
 }
 
 if (!name) {
-  console.error(
-    "Please provide a name for the component, service, store, and type."
-  );
-  process.exit(1);
+	console.error('Please provide a name for the component, service, store, and type.')
+	process.exit(1)
 }
 
 try {
-  // Generate component
-  execSync(
-    `ng generate component ${name} --flat --skip-tests --inline-template --inline-style --path ${folderPath}`,
-    { stdio: "inherit" }
-  );
+	// Generate component
+	execSync(`ng generate component ${name} --flat --skip-tests --path ${folderPath}`, { stdio: 'inherit' })
 
-  // Generate service
-  // execSync(
-  //   `ng generate service ${name} --flat --skip-tests --path ${folderPath}`,
-  //   { stdio: "inherit" }
-  // );
+	// Generate service
+	// execSync(
+	//   `ng generate service ${name} --flat --skip-tests --path ${folderPath}`,
+	//   { stdio: "inherit" }
+	// );
 
-  const pascalName = toPascalCase(name);
+	const pascalName = toPascalCase(name)
 
-  const serviceFilePath = path.join(folderPath, `${name}.service.ts`);
-  fs.writeFileSync(
-    serviceFilePath,
-    `
+	const serviceFilePath = path.join(folderPath, `${name}.service.ts`)
+	fs.writeFileSync(
+		serviceFilePath,
+		`
 import { HttpClient } from "@angular/common/http";
 import { inject } from "@angular/core";
 import { of } from "rxjs";
@@ -63,14 +58,14 @@ export const [inject${pascalName}Service, provide${pascalName}Store] = createInj
   },
   { isRoot: true });
 `,
-    "utf8"
-  );
+		'utf8'
+	)
 
-  // Create store file
-  const storeFilePath = path.join(folderPath, `${name}.store.ts`);
-  fs.writeFileSync(
-    storeFilePath,
-    `
+	// Create store file
+	const storeFilePath = path.join(folderPath, `${name}.store.ts`)
+	fs.writeFileSync(
+		storeFilePath,
+		`
 import { signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 import { computed } from '@angular/core';
 
@@ -102,24 +97,22 @@ export const ${pascalName}Store = signalStore(
   })),
 );
 `,
-    "utf8"
-  );
+		'utf8'
+	)
 
-  // Create type file
-  const typeFilePath = path.join(folderPath, `${name}.type.ts`);
-  fs.writeFileSync(
-    typeFilePath,
-    `
+	// Create type file
+	const typeFilePath = path.join(folderPath, `${name}.type.ts`)
+	fs.writeFileSync(
+		typeFilePath,
+		`
 export interface ${pascalName} {
   // Type definitions for the ${pascalName} object
 }
 `,
-    "utf8"
-  );
+		'utf8'
+	)
 
-  console.log(
-    `Generated component, service, store, and type files for ${name} in ${folderPath}`
-  );
+	console.log(`Generated component, service, store, and type files for ${name} in ${folderPath}`)
 } catch (error) {
-  console.error("Error generating files:", error.message);
+	console.error('Error generating files:', error.message)
 }
